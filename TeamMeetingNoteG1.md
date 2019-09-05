@@ -27,8 +27,11 @@ Project management and collabration Tool: Github
 #### 2.2 Project Summerization
 
 Functional Requirement:
+
 1. Generate a movie list that is interesting for a user
+
 Quality Requirement:
+
 1. Todo
   
 Design:
