@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.7">
+<file name="/Users/chenxili/Desktop/cmu_fall2019/17645/17645GroupProjectTeamA/KafkaStreamProcess/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/APIAccessor.java">
+</file>
+<file name="/Users/chenxili/Desktop/cmu_fall2019/17645/17645GroupProjectTeamA/KafkaStreamProcess/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/MovieLogKafkaReader.java">
+</file>
+<file name="/Users/chenxili/Desktop/cmu_fall2019/17645/17645GroupProjectTeamA/KafkaStreamProcess/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/datamodel/BasicInfo.java">
+</file>
+<file name="/Users/chenxili/Desktop/cmu_fall2019/17645/17645GroupProjectTeamA/KafkaStreamProcess/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/datamodel/RateData.java">
+</file>
+<file name="/Users/chenxili/Desktop/cmu_fall2019/17645/17645GroupProjectTeamA/KafkaStreamProcess/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/datamodel/WatchData.java">
+</file>
+</checkstyle>
