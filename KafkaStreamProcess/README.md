@@ -27,6 +27,15 @@ We can get a series ConsumerRecord after polling from the topic by consumer. For
             - /rate/{movie name separated by +}+{year}={rate}
     
 Notice that in "{movie name separated by +}+{year}", it is possible that the year information is missing, which would result into "{movie name separated by +}+" (end with +). 
+### User & Movie Information Queried from API
+User information can be queried with:
+http://128.2.204.215:8080/user/<userid>
+Movie information can be queried with:
+http://128.2.204.215:8080/movie/<movieid>
+
+In this prgram, after extracting userid and movieid from Kafka stream, the program will first check if the data store has already exists this user or movie. If the user or movie does not exist, the API would be queried and the result would be stored as key-value pair (id-result pair) in the data store (a HashMap at current stage). 
+
+In future, we will discuss and determine how long should the data store be updated, in other words, although a user or movie may exist in the data store, should we update them with new information? (A metadata with timestamp can tell the last modification time)
 
 ## Gradle \ Lombok Notes 
 ### Gradle
@@ -38,6 +47,10 @@ This program is managed by Gradle, here are several notes when compiling or runn
 This program uses Project Lombok as the annotation processor. If you are using Intellij as IDE, you need to go to 
 "Settings > Build > Compiler > Annotation Processors”
 to enable the Lombok to process the annotation like @Data, and @RequiredArgsConstructor. 
+
+## Future work
+1. Currently the program only use single consumer to poll message from Kafka topic, in the future, the program would be modified to be multi-thread multi-consumers to poll message in parallel, which will significantly improve the efficient.
+2. In current stage, the program only store the data into HashMap and furtherly output as json file. In the future, the program should integrated with database (such as MongoDB) to store, update, or query data from real database.
 
 ## Development Environment
 * JDK version: 11
