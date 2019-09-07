@@ -4,8 +4,6 @@
 
 import pandas as pd
 rate_file = "data/RateData100000.json"
-user_file = "data/UserDataStore.json"
-movie_file = "data/MovieDataStore.json"
 
 def extract_data_construct_csv():
     rate_data_store = extract_dict_from_file(rate_file)
