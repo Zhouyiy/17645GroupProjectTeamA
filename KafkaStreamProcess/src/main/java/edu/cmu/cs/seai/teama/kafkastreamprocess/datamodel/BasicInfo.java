@@ -12,5 +12,5 @@ public class BasicInfo {
     private final long messageId;
     private final String accquireTime;
     private final String userId;
-    private final String movieId;
+    private String movieId;
 }

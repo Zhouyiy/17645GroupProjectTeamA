@@ -7,6 +7,7 @@ import edu.cmu.cs.seai.teama.kafkastreamprocess.datamodel.WatchData;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -74,33 +75,39 @@ public class MovieLogKafkaReader {
         // Subscribe a topic
         consumer.subscribe(topics);
 
-        Map<String, WatchData> watchDataMap = new HashMap<>();
-        Map<String, RateData> rateDataMap = new HashMap<>();
+        Map<String, Map<String, WatchData>> watchDataMap = new HashMap<>();
+        Map<String, Map<String, RateData>> rateDataMap = new HashMap<>();
         Map<String, String> movieDataStore = new HashMap<>();
         Map<String, String> userDataStore = new HashMap<>();
+        int counter = 0;
 
         try {
-            while (watchDataMap.size() + rateDataMap.size() < Integer.parseInt(args[0])) {
+            while (counter < Integer.parseInt(args[0])) {
                 //Define the time-out interval and controls how long poll
                 // will block if data is not available in the consumer buffer.
-                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
+                ConsumerRecords<String, String> records =
+                        consumer.poll(Duration.ofMillis(100));
                 for (ConsumerRecord<String, String> record : records) {
-                    System.out.println(record.value());
                     BasicInfo basicInfo = constructBasicInfo(record);
-                    if (updateDataStoreSuccess(basicInfo.getMovieId(),
-                            basicInfo.getUserId(), movieDataStore,
-                            userDataStore)) {
-                        if (isRateData(record)) {
-                            RateData rateData =
-                                    constructRateData(basicInfo, record);
-                            rateDataMap.put(rateData.getBasicInfo().getUserId(),
-                                    rateData);
-                        } else {
-                            WatchData watchData =
-                                    constructWatchData(basicInfo, record);
-                            watchDataMap.put(watchData.getBasicInfo().getUserId(), watchData);
-                        }
+                    updateDataStore(basicInfo, movieDataStore,
+                            userDataStore);
+                    if (isRateData(record)) {
+                        RateData rateData =
+                                constructRateData(basicInfo, record);
+                        rateDataMap.putIfAbsent(basicInfo.getUserId(),
+                                new HashMap<>());
+                        rateDataMap.get(basicInfo.getUserId()).put(basicInfo.getAccquireTime(), rateData);
+                    } else {
+                        WatchData watchData =
+                                constructWatchData(basicInfo, record);
+                        watchDataMap.putIfAbsent(basicInfo.getUserId(),
+                                new HashMap<>());
+                        watchDataMap.get(basicInfo.getUserId()).put(basicInfo.getAccquireTime(),
+                                watchData);
                     }
+                    counter++;
+                    if (counter >= Integer.parseInt(args[0])) break;
+                    System.out.println(counter);
                 }
             }
         } finally {
@@ -119,23 +126,29 @@ public class MovieLogKafkaReader {
      * information data store. This method prevent the duplicate invoking and
      * storing the same data.
      *
-     * @param movieId        movie id
-     * @param userId         user id
+     * @param basicInfo BasicInfo
      * @param movieDataStore data store for storing movie information
      * @param userDataStore  data store for storing user information
      * @return true if successfully update both data store.
      */
-    private static boolean updateDataStoreSuccess(String movieId, String userId,
+    private static void updateDataStore(BasicInfo basicInfo,
                                                   Map<String, String> movieDataStore,
                                                   Map<String, String> userDataStore) {
-        String movieInfo = API_ACCESSOR.getResult(MOVIE_URL_PREFIX + movieId);
-        String userInfo = API_ACCESSOR.getResult(USER_URL_PREFIX + userId);
+        String movieInfo =
+                API_ACCESSOR.getResult(MOVIE_URL_PREFIX + basicInfo.getMovieId());
+        String userInfo =
+                API_ACCESSOR.getResult(USER_URL_PREFIX + basicInfo.getUserId());
         if (!movieInfo.equals("") && !userInfo.equals("")) {
-            movieDataStore.putIfAbsent(movieId, movieInfo);
-            userDataStore.putIfAbsent(userId, userInfo);
-            return true;
+            movieDataStore.putIfAbsent(getTMDB_ID(movieInfo),
+                    movieInfo);
+            userDataStore.putIfAbsent(basicInfo.getUserId(), userInfo);
+            basicInfo.setMovieId(getTMDB_ID(movieInfo));
         }
-        return false;
+    }
+
+    private static String getTMDB_ID(String movieInfo) {
+        JSONObject jsonObject = new JSONObject(movieInfo);
+        return jsonObject.getInt("tmdb_id") + "";
     }
 
     /**
@@ -154,8 +167,10 @@ public class MovieLogKafkaReader {
         } else {
             movieId = movieInfo[2].split("=")[0];
         }
-        return new BasicInfo(record.offset(), messages[0].trim(),
-                messages[1].trim(), movieId);
+        BasicInfo basicInfo = new BasicInfo(record.offset(), messages[0].trim(),
+                messages[1].trim());
+        basicInfo.setMovieId(movieId);
+        return basicInfo;
     }
 
     /**
