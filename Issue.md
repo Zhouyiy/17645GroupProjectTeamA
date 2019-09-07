@@ -16,3 +16,4 @@
 	    
       Requirement:
                   1. Basic feature engineering techniques applied.
+		  2. Simple movie features like movie genre and movie language are enough
