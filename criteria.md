@@ -30,7 +30,7 @@ Describe the data you used for learning (provided and external), how you gathere
     - title
     - ~~original_title~~
     - adult
-    - belongs_to_collection: {}
+    - belongs_to_collection: {'id', 'poster_path', 'backdrop_path', 'name'}
     - budget
     - genres:[{id, name}]
     - ~~homepage~~
