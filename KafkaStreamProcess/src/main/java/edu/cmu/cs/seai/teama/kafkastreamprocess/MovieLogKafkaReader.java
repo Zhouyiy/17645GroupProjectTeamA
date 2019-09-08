@@ -75,7 +75,8 @@ public class MovieLogKafkaReader {
         // Subscribe a topic
         consumer.subscribe(topics);
 
-        Map<String, Map<String, WatchData>> watchDataMap = new HashMap<>();
+        Map<String, Map<String, List<WatchData>>> watchDataMap =
+                new HashMap<>();
         Map<String, Map<String, RateData>> rateDataMap = new HashMap<>();
         Map<String, String> movieDataStore = new HashMap<>();
         Map<String, String> userDataStore = new HashMap<>();
@@ -96,14 +97,15 @@ public class MovieLogKafkaReader {
                                 constructRateData(basicInfo, record);
                         rateDataMap.putIfAbsent(basicInfo.getUserId(),
                                 new HashMap<>());
-                        rateDataMap.get(basicInfo.getUserId()).put(basicInfo.getAccquireTime(), rateData);
+                        rateDataMap.get(basicInfo.getUserId()).put(basicInfo.getMovieId(), rateData);
                     } else {
                         WatchData watchData =
                                 constructWatchData(basicInfo, record);
                         watchDataMap.putIfAbsent(basicInfo.getUserId(),
                                 new HashMap<>());
-                        watchDataMap.get(basicInfo.getUserId()).put(basicInfo.getAccquireTime(),
-                                watchData);
+                        watchDataMap.get(basicInfo.getUserId()).putIfAbsent(basicInfo.getMovieId(),
+                                new ArrayList<>());
+                        watchDataMap.get(basicInfo.getUserId()).get(basicInfo.getMovieId()).add(watchData);
                     }
                     counter++;
                     if (counter >= Integer.parseInt(args[0])) break;

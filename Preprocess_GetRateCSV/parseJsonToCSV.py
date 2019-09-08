@@ -4,25 +4,36 @@
 
 import pandas as pd
 rate_file = "data/RateData100000.json"
+watch_file = "data/WatchData100000.json"
 
-def extract_data_construct_csv():
+def extract_rate_dataframe():
     rate_data_store = extract_dict_from_file(rate_file)
+    watch_data_store =extract_dict_from_file(watch_file)
     users = []
     movies = []
     scores = []
+    block_size = []
     for user_id in rate_data_store:
-        for time_stamp in rate_data_store[user_id]:
-            dict = rate_data_store[user_id][time_stamp]["basicInfo"]
+        for movie_id in rate_data_store[user_id]:
             users.append(user_id)
-            movies.append(dict['movieId'])
-            scores.append(rate_data_store[user_id][time_stamp]['score'])
+            movies.append(movie_id)
+            scores.append(rate_data_store[user_id][movie_id]['score'])
+            block_size.append(-1)
 
-    dataframe = pd.DataFrame({'user_id': users, 'movie_id': movies, 'score': scores})
-    dataframe.to_csv("rate100000.csv", index=False, sep=',')
+    for user_id in watch_data_store:
+        for movie_id in watch_data_store[user_id]:
+            users.append(user_id)
+            movies.append(movie_id)
+            scores.append(-1)
+            blocks = len(watch_data_store[user_id][movie_id])
+            block_size.append(blocks)
+
+    dataframe = pd.DataFrame({'user_id': users, 'movie_id': movies, 'score': scores, 'block_size': block_size})
+    dataframe.to_csv("100000.csv", index=False, sep=',')
 
 def extract_dict_from_file(file_name):
     with open(file_name, "r") as file:
         return eval(file.read())
 
 if __name__ == '__main__':
-    extract_data_construct_csv()
+    extract_rate_dataframe()
