@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a764bb9-667c-4185-bf8b-c125f1fa67d2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/MovieLogKafkaReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/MovieLogKafkaReader.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/MovieLogKafkaReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2">
-              <caret line="99" column="82" lean-forward="true" selection-start-line="99" selection-start-column="82" selection-end-line="99" selection-end-column="82" />
+            <state relative-caret-position="342">
+              <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -70,7 +69,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="456" />
-    <option name="width" value="531" />
+    <option name="width" value="1172" />
     <option name="height" value="975" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -80,7 +79,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -127,6 +125,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -164,16 +163,17 @@
       <updated>1567874198176</updated>
       <workItem from="1567874199633" duration="3644000" />
       <workItem from="1567896523116" duration="2184000" />
+      <workItem from="1567975789123" duration="217000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5828000" />
+    <option name="totallyTimeSpent" value="6045000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="456" y="0" width="531" height="975" extended-state="0" />
+    <frame x="456" y="0" width="1172" height="975" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.84662575" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.38141593" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -190,7 +190,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.3295583" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.96602494" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.42695355" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="CheckStyle" order="11" weight="0.3295583" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
@@ -213,17 +213,10 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/datamodel/WatchData.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/MovieLogKafkaReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/datamodel/RateData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+        <state relative-caret-position="342">
+          <caret line="120" column="50" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -234,10 +227,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/MovieLogKafkaReader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/datamodel/RateData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="99" column="82" lean-forward="true" selection-start-line="99" selection-start-column="82" selection-end-line="99" selection-end-column="82" />
+        <state relative-caret-position="153">
+          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/cmu/cs/seai/teama/kafkastreamprocess/datamodel/WatchData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
         </state>
       </provider>
     </entry>

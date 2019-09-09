@@ -117,10 +117,10 @@ public class MovieLogKafkaReader {
         }
 
         // write result to json file
-        writeToFile("WatchData1000.json", GSON.toJson(watchDataMap));
-        writeToFile("RateData1000.json", GSON.toJson(rateDataMap));
-        writeToFile("MovieDataStore.json", GSON.toJson(movieDataStore));
-        writeToFile("UserDataStore.json", GSON.toJson(userDataStore));
+        writeToFile("WatchData200000.json", GSON.toJson(watchDataMap));
+        writeToFile("RateData200000.json", GSON.toJson(rateDataMap));
+        writeToFile("MovieDataStore200000.json", GSON.toJson(movieDataStore));
+        writeToFile("UserDataStore200000.json", GSON.toJson(userDataStore));
     }
 
     /**
