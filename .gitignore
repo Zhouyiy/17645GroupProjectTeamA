@@ -1,3 +1,5 @@
+.idea
+.DS_Store
 .ipynb_checkpoints/
 .vscode/
 # Created by https://www.gitignore.io/api/gradle
@@ -24,4 +26,3 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/gradle
 .DS_Store
-.idea
