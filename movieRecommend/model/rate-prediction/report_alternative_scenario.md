@@ -27,28 +27,36 @@ To prove that the linear regression model is the better choice, the criteria sho
 
 ## Attributes
 ### Design attributes
+
 #### Accuracy
 We split the data into a train-test split of 70%:30%. On training data, we performed a grid search of the optimal hyper-parameters of two models(`alpha` for Lasso, `max_depth` and `n_estimators` for random forest). And we use the mean-squared-error(MSE) as our criterion. It turns out that the MSE of Lasso is 0.533825, and the one for random forest is 0.533390. In this sense, the linear regression model achieve almost the same accuracy as random forest do on predicting the popularity.
+
 #### Training Time
+
 ![sample_num_training_time](./images/sample_training.png)
 
 ![feature_num_training_time](./images/feature_training.png)
+
 We can see that it takes more time for random forest to train over large dataset compared to linear regression. And the difference gets bigger and bigger when we have larger and larger dataset.
 
 #### Inference Time
+
 ![inference_sample](./images/sample_inference.png)
 
 ![inference_time_feature](./images/feature_inference.png)
+
 Again, it takes more time for random forest to infer compared to linear regression. Only when the number of sample reaches 750000 will the linear regression takes more time to infer. We suspect that it is because linear regression can utilize linear algebra to do fast matrix computation and get the result of training and inference, while random forest may not be optimized in this way.
 
 #### Memory usage (model size)
+
 ![model_size_sample](./images/sample_size.png)
 
 ![feature_size](./images/feature_size.png)
+
 The sizes of these models do not rely on the number of samples we have in our dataset. Only when the number of feature reaches around 1500 will the model size of the linear regression could possibly exceeds the size of the random forest model, which is very unlikely possible in this situation. So generally the size of the linear regression model is much smaller than the size of the random forest model.
 
 
-### interpretability
+## interpretability
 
 Both of these models have good interpretability. However, we argue that linear regression has an even better interpretability compared to random forest. First, for low-dimension data, linear regression can be used to produce intuitive visualizations by scattering the data points and drawing a line. This really helps stakeholders who do not have much machine learning background to easily grasp the meaning. Second, each parameter in linear regression has a very clear relationship with one of the features. You can even tell how much popularity increase or decrease you can expect if you tune one of the movie features. Third, if you have a large random forest with deep trees, the interpretability of this model may decrease a lot compared to a single decision tree.
 
